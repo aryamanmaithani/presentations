@@ -1,0 +1,145 @@
+\documentclass[11pt,leqno,landscape,semhelv]{seminar}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{fancybox}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{centernot}
+\usepackage{tikz-cd}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+
+\usepackage{chngcntr}
+\numberwithin{thm}{section}
+%\numberwithin{defn}{section}
+\numberwithin{equation}{section}
+
+\newcommand{\example}[1]{\refstepcounter{thm}\par\medskip
+   {\textbf{Example \thethm.} #1} \rmfamily}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {}{\centering\huge\S\thesection}{0.25cm}{\centering\Huge\textsc}
+\titleformat{\subsection}[block]
+  {}{\S\S\thesubsection}{0.25cm}{\Large}
+  
+\renewcommand{\sec}[1]{%
+\begin{slide}
+\begin{center}
+    \begin{center}
+        \section{#1}
+    \end{center}
+\end{center}
+\end{slide}}
+\newcommand{\cd}[1]{
+\begin{center}
+	\begin{tikzcd}
+		#1
+	\end{tikzcd}
+\end{center}}
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\op}{^{\operatorname{op}}}
+\newcommand{\mono}{\rightarrowtail}
+\newcommand{\epi}{\twoheadrightarrow}
+
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+\definecolor{mylinkcolor}{RGB}{0, 255, 255} %46, 51, 63
+
+\usepackage{pagecolor}
+%\pagecolor{mybgcolor}
+%\color{white}
+
+\usepackage[colorlinks=true,
+	%linkcolor=mylinkcolor
+	]
+	{hyperref}
+
+
+\title{\vspace{1cm} Category Theory}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+\begin{slide}
+	\tableofcontents
+\end{slide}
+\input{sec1.tex}
+%
+%
+%
+\sec{Abstract Structures}
+\subsection{Epis and Monos}
+\begin{defn} 
+	In any category $C,$ an arrow
+	\begin{equation*} 
+		f:A\to B
+	\end{equation*}
+	is called a 
+	\begin{itemize}
+		\item \emph{monomorphism}, if given any $g, h:C\to A,$ $fg = fh$ implies $g = h.$
+		\item \emph{epimorphism}, if given any $i, j:B\to D,$ $if = jf$ implies $i = j.$
+	\end{itemize}
+	\begin{equation*} 
+		\begin{tikzcd}
+		C \arrow[rr, "h"', shift right] \arrow[rr, "g", shift left] &  & A \arrow[rr, "f"] &  & B \arrow[rr, "i", shift left] \arrow[rr, "j"', shift right] &  & D
+		\end{tikzcd}
+	\end{equation*}
+\end{defn}	
+We often write $f:A\mono B$ if $f$ is a monomorphism and $f:A \epi B$ if $f$ is an epimorphism.
+\begin{prop} \label{prop:monin}
+	A function $f:A\to B$ between is monic iff $f$ is injective.
+\end{prop}
+\begin{proof} 
+	$(\implies)$ Suppose that $f$ is monic. We show that $f$ is injective. \\
+	Let $a, a' \in A$ be such that $f(a) = f(a').$\\
+	Consider $g:A \to A$ defined as
+	\begin{align*} 
+		g(x) = \begin{cases}
+			x & x \neq a\\
+			a' & x = a
+		\end{cases}
+	\end{align*}
+	and let $h:A \to A = 1_A.$\\
+	Clearly, one sees that $fg = f = f1_A.$ As $f$ is monic, we have that $1_A = g.$ In particular, $g(a) = 1_A(a)$ which yields $a' = a.$\\
+	$(\impliedby)$ Suppose that $f$ in injective. We show that $f$ is monic.\\
+	Let $g, h:C\to A$ be arrows such that $fg = fh.$ Let $a \in A$ be arbitrary. Then, $fg(a) = fh(a).$ As $f$ is injective, this yields $g(a) = h(a).$
+\end{proof}
+Before going ahead, we may make the following observation for proving that $f:A\to B$ is injective.
+\begin{prop} \label{prop:injec}
+	Let $f:A\to B$ be a function. Let $1 = \{*\}$ be any one-element set.\\
+	Suppose that $fg \neq fh$ whenever $g, h: 1 \to A$ are distinct functions.\\
+	Then, $f$ is injective.
+\end{prop}
+\begin{proof} 
+	Let $a, a' \in A$ be such that $a \neq a'.$ Consider the functions
+	\begin{equation*} 
+		\bar{a}, \bar{a'} : 1 \to A
+	\end{equation*}
+	where
+	\begin{equation*} 
+		\bar{a}(*) = a, \quad \bar{a'}(x) = a'.
+	\end{equation*}
+	Since $\bar{a} \neq \bar{a'},$ it follows from our hypothesis that $f\bar{a} \neq f\bar{a'}.$ Thus, $f(a) = (f\bar{a})(x) \neq (f\bar{a'})(x) = f(a').$ Hence, it follows that $f$ is injective.
+\end{proof}
+Using this proposition, one may give a slightly simpler proof of $(\implies)$ of Proposition \ref{prop:monin}.\\
+\example{} In many categories of ``structured sets'' like monoids, the monos are exactly the ``injective homomorphisms''. More precisely, a homomorphism $h:M\to N$ is monic precisely if the underlying function $|h|:M\to N$ is injective. (By the above, it is the same as saying $|h|$ is monic.)\\
+To see that $|h|$ being injective $\implies$ $h$ is monic, one may consider the earlier proof.\\
+Conversely, let $h:M \to N$ be monic. We show that $|h|$ is monic. \\
+Suppose $x, y:1 \to |M|$ are two different ``elements'' (arrows), where $1 = \{*\},$ any one-element set. By Proposition \ref{prop:injec}, it suffices to prove that $|h|x, |h|y : 1 \to N$ are also distinct.\\
+By the UMP of the free monoid $M(1),$ there are distinct corresponding homomorphisms $\bar{x}, \bar{y}:M(1) \to M,$ with distinct composites $h\circ \bar{x}, h\circ \bar{y}:M(1) \to N,$ since $h$ is monic. Thus, the corresponding ``elements'' $|h|\circ x, |h|\circ y:1 \to N$ are also distinct, again by the UMP of $M(1).$
+\end{document}
