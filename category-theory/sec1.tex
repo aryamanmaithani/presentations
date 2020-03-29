@@ -28,7 +28,8 @@ We avoid any technicalities of set theory and define what a category is.
 		for all $f:A\to B.$
 	\end{itemize}
 \end{defn}
-The above highly imitates the behaviour of that of sets and functions. Indeed, that shall be our first example of a category. Many of our other examples will also consist of categories where the objects are ``structured sets'' and arrows ``structure-preserving functions.'' However, these are not all. A category is \emph{anything} that satisfies the above definition.
+The above highly imitates the behaviour of that of sets and functions. Indeed, that shall be our first example of a category. Many of our other examples will also consist of categories where the objects are ``structured sets'' and arrows ``structure-preserving functions.'' However, these are not all. A category is \emph{anything} that satisfies the above definition.\\
+Note that technically, it isn't correct to write $C \in \mathbf{C}$ or $(f:C \to D) \in \mathbf{C};$ however, we shall abuse notation and write so as the alternative is too annoying.
 \subsection{Examples}
 \begin{enumerate} 
 	\item The category $\mathsf{Set}.$ The objects of this category are (all) sets and the arrows are (all) functions between sets. The composite of two arrows is defined as composition of functions. It can be verified that this is indeed a well defined composition. Lastly, given any object $X$ (a set), the identity arrow of $X$ is simply the identity function $1_X = \id_X:X\to X.$\\
@@ -47,14 +48,14 @@ The above highly imitates the behaviour of that of sets and functions. Indeed, t
 		$\mathsf{Mon}$ & Monoids & Monoid homomorphisms\\
 		$\mathsf{Grp}$ & Groups & Group homomorphisms\\
 		$\mathsf{Ring}$ & Rings & Ring homomorphisms\\
-		$\mathsf{Field}$ & Fields & Fields extensions\\
+		$\mathsf{Field}$ & Fields & Field extensions\\
 		$\mathsf{Vec}_\Bbbk$ & Vector spaces over $\Bbbk$ & Linear maps\\
 		$\mathsf{Pos}$ & Posets & Order-preserving maps\\
 		$\mathsf{BA}$ & Boolean algebra & Boolean homomorphisms\\
 		\hline
 		\end{tabular}
 	\end{center}
-	\item Preoders. A preorder is a set $P$ equipped with a binary relation $\le$ satisfying:
+	\item Preorders. A preorder is a set $P$ equipped with a binary relation $\le$ satisfying:
 	\begin{itemize}
 		\item $a \le a$ for all $a \in P,$ and
 		\item $a \le b$ and $b \le c$ implies $a \le c$ for all $a, b, c \in P.$
@@ -72,7 +73,7 @@ The above highly imitates the behaviour of that of sets and functions. Indeed, t
 		a \le b \text{ and } b \le a \implies a = b \text{ for all } a, b \in P.
 	\end{equation*}
 	With the same construction as before, we see that a poset is also a category.
-	\item Finite categories. We already have some examples of these from the previous case of posets. Let's look at some of them in particular.
+	\item Finite categories. These are categories with finitely many arrows (and thus, finitely many objects as well). As the previous example shows posets to be categories, we can already get many examples. Let's look at some of them in particular.
 	\begin{itemize}
 		\item The category $\mathbf{1}$ looks like this:
 		\begin{center}
@@ -96,7 +97,6 @@ The above highly imitates the behaviour of that of sets and functions. Indeed, t
 			\end{tikzcd}
 		\end{center}
 		This is the category recognised by the poset $\{1, 2, 3\}$ with the typical ordering.
-		\newpage
 		\item The category $\mathbf{0}$ looks like this:
 		\begin{center}
 			\begin{tikzcd}
@@ -180,10 +180,10 @@ Since inverses are unique, we write the inverse of $f$ as $f^{-1}.$ (This is, of
 \example{} Let us consider some familiar categories where the objects are structured sets.
 \begin{enumerate}
 	\item $\mathsf{Set}.$ Here, the isomorphisms are precisely the bijections.
-	\item $\mathsf{Mon}, \mathsf{Grp}, \mathsf{Ring}, \mathsf{Field}, \mathsf{Vec}_\Bbbk.$ Here, the isomorphisms are precisely the bijective (appropriate) homomorphisms.
+	\item $\mathsf{Mon}, \mathsf{Grp}, \mathsf{Ring}, \mathsf{Field}, \mathsf{Vec}_\Bbbk.$ Here, the isomorphisms are precisely the (appropriate) homomorphisms\footnote{By ``appropriate,'' we mean that one must consider \emph{monoid} homomorphisms in the case of $\mathsf{Mon}$ and so on.} which are bijective.
 	\item $\mathsf{Pos}.$ Here, the isomorphisms are \emph{\textbf{not}} the same as bijective order-preserving maps. While every isomorphism is indeed a bijective order-preserving map, the converse is not true.\\
 	For example, consider the posets $P_1$ and $P_2$ defined on $\{a, b\}.$ Let the order on $P_1$ be the discrete one. Let the order on $P_2$ be $a \le b.$ Consider the identity function as an arrow from $P_1$ to $P_2.$ This is clearly a bijection that preserves the (trivial) order relations. However, this clearly is not an isomorphism of posets. (One may manually verify that the set-theoretic inverse is not an arrow in $\mathsf{Pos}$. Later, we shall see a method that utilises the structure.)
-	\item $\mathsf{Top}.$ Once again, it does \textbf{\emph{not}} the case that continuous bijections are isomorphisms.
+	\item $\mathsf{Top}.$ Once again, it is \textbf{\emph{not}} the case that continuous bijections are isomorphisms.
 \end{enumerate}
 The last two examples illustrate how isomorphisms need not always take the same form. The definition of isomorphism is our first example of an \emph{abstract}, category theoretic definition of an important notion. It is abstract in the sense that it makes use only of the category theoretic notions, rather than some additional information about the objects and arrows.\\
 As the reader may be familiar that one often defines a ``group isomorphism'' to be a bijective homomorphism. This definition makes use of the following fact - the inverse of a bijective homomorphism is once again a homomorphism. The advantage of our definition is that applies in \emph{any} category.
@@ -252,7 +252,7 @@ We now consider some constructions that help us create new categories from old.
 	\end{equation*}
 	(A possible confusion that may arise in the mind of the reader is - why should such a commutative square exist? However, note that we are not claiming the existence of such a square. It could very well be possible that there is no arrow between two given objects in $\mathbf{C}^\to$.)\\
 	The identity arrow $1_f$ on an object $f:A\to B$ is the pair $(1_A, 1_B).$\\
-	Composition of arrows is component-wise:
+	Composition of arrows is componentwise:
 	\begin{equation*} 
 		(h_1, h_2)\circ (g_1, g_2) = (h_1\circ g_1, h_2\circ g_2).
 	\end{equation*}
@@ -546,7 +546,7 @@ in $\mathsf{Cat}$:
 		\mathbf{C}(G) \arrow[rr, dotted, "\bar{h}"] && \mathbf{D}
 	\end{tikzcd}
 \end{equation*}
-in $\mathbf{Graph}$:
+in $\mathsf{Graph}$:
 \begin{equation*} 
 	\begin{tikzcd}
 	{\vert}\mathbf{C}(G){\vert} \arrow[rr, "{\vert}\bar{h}{\vert}"] &  & {\vert}\mathbf{D}{\vert} \\&  &\\&  &\\

@@ -13,7 +13,7 @@ A monoid homomorphism $h:(M, *, u_M) \to (N, \cdot, u_N)$ is a function $h:M\to 
 \end{itemize}
 \subsection{Groups}
 With the same notation as earlier, a monoid $M$ is said to be \emph{group} if for every $a \in M,$ there exists some $b \in M$ such that $a * b = u = b * a.$\\
-A group homomorphism is monoid homomorphism between groups.
+A group homomorphism is a monoid homomorphism between groups.
 \subsection{Preorders}
 A \emph{preorder} is a set $P$ equipped with a binary relation $\le$ satisfying:
 \begin{itemize}
@@ -44,4 +44,11 @@ A typical example of a Boolean algebra is the power-set $\mathcal{P}(X)$ of $X.$
 \begin{equation*} 
 	0 = \emptyset, 1 = X, A \vee B = A \cup B, A \wedge B = A \cap B, \neg A = X\setminus A.
 \end{equation*}
-A Boolean homomorphism is a function $h:B\to B'$ between Boolean algebras that is an order-preserving map which preserves the addition structure, id est, $h(0) = 0, h(1) = 1, h(a \vee b) = h(a) \vee h(b), h(a \wedge b) = h(a) \wedge h(b), h(\neg a) = \neg h(a).$
+A Boolean homomorphism is a function $h:B\to B'$ between Boolean algebras that is an order-preserving map which preserves the addition structure, id est, 
+\begin{align*} 
+	h(0) &= 0, \\
+	h(1) &= 1, \\
+	h(a \vee b) &= h(a) \vee h(b), \\
+	h(a \wedge b) &= h(a) \wedge h(b), \text{ and} \\
+	h(\neg a) &= \neg h(a).
+\end{align*}
