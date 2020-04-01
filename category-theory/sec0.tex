@@ -1,4 +1,25 @@
-\sec{Some Structures}
+\sec{Preliminaries}
+These are not strictly preliminaries, in the sense that you do not \emph{need} to know these to understand the text. However, since the examples do rely on these, it's certainly beneficial to know these.\\
+The reader may skip these at the beginning and return to these whenever the text demands it.
+\subsection{Axiom of Choice}
+Given a collection $\mathcal{B}$ of nonempty sets, there exists a functions
+\begin{equation*} 
+	f:\mathcal{B} \to \bigcup_{B \in \mathcal{B}}B
+\end{equation*}
+such that $f(B) \in B,$ for each $B \in \mathcal{B}.$\\
+The function $f$ is called a \emph{\textbf{choice function}} for the collection $\mathcal{B}.$\\
+Note that the above can be stated in an equivalent way where the sets are being indexed by some set. This is done in the following manner:\\
+Let $X$ be a set and $(E_x)_{x \in X}$ be an arbitrary collection of nonempty sets. \\
+Set $E = \displaystyle\bigcup_{x \in X}E_x.$ \\
+Then, there exists a function
+\begin{equation*} 
+ 	f : X \to E
+\end{equation*}
+such that $f(x) \in E_x,$ for all $x \in X.$\\
+As before, $f$ is called a \emph{\textbf{choice function}}.\\~\\
+Informally, the definition above states that:\\
+Given a collection $\mathcal{B}$ of nonempty sets, there is a way to ``choose'' exactly one element from each set. (Note that we do not demand the sets to be disjoint, so it is possible that the same element can picked from two different sets. That is okay.) \\
+One may also note that there is no uniqueness demanded of the choice function.
 \subsection{Monoids}
 A \emph{monoid} is a set $M$ equipped with a binary operation $*$ and a distinguished element $u \in M$ satisfying:
 \begin{itemize}
