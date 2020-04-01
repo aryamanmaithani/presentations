@@ -312,7 +312,7 @@ In this sense, a map from a monoid is determined by its effect on all of the fig
 %
 %
 \subsection{Products}
-\begin{defn} 
+\begin{defn} \label{def:prod}
 	In any category $\mathbf{C},$ a \emph{product diagram} for the objects $A$ and $B$ consists of an object $P$ and arrows
 	\begin{equation*} 
 		\begin{tikzcd}
@@ -375,7 +375,7 @@ If $A$ and $B$ have a product, we write
 		A && A \times B \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
 	\end{tikzcd}
 \end{equation}
-for one such product. Then given $X, x_1, x_2$ as in the definition, we write
+for one such product. Then given $X, x_1, x_2$ as in the definition (\ref{def:prod}), we write
 \begin{equation} \label{eq:prodpair}
 	\langle x_1, x_2\rangle \text{ for } u:X\to A\times B.
 \end{equation}
@@ -681,4 +681,6 @@ For example, the forgetful functor $U:\mathsf{Mon}\to\mathsf{Set}$ preserves pro
 	\begin{equation*} 
 		\Hom(X, A \times B) \cong \Hom(X, A) \times \Hom(X, B).
 	\end{equation*}
+	We have used that $\varv_X$ (defined in (\ref{eq:vx})) is simply $\langle \Hom(X, p_1), \Hom(X, p_2)\rangle$ (as defined in (\ref{eq:prodpair})).\\
+
 \end{proof}
