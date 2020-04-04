@@ -2,13 +2,13 @@
 These are not strictly preliminaries, in the sense that you do not \emph{need} to know these to understand the text. However, since the examples do rely on these, it's certainly beneficial to know these.\\
 The reader may skip these at the beginning and return to these whenever the text demands it.
 \subsection{Axiom of Choice}
-Given a collection $\mathcal{B}$ of nonempty sets, there exists a functions
+Given a collection $\mathcal{B}$ of nonempty sets, there exists a function
 \begin{equation*} 
 	f:\mathcal{B} \to \bigcup_{B \in \mathcal{B}}B
 \end{equation*}
 such that $f(B) \in B,$ for each $B \in \mathcal{B}.$\\
 The function $f$ is called a \emph{\textbf{choice function}} for the collection $\mathcal{B}.$\\
-Note that the above can be stated in an equivalent way where the sets are being indexed by some set. This is done in the following manner:\\
+Note that the above can be stated in an equivalent way where the collection of (nonempty) sets is being indexed by some set. This is done in the following manner:\\
 Let $X$ be a set and $(E_x)_{x \in X}$ be an arbitrary collection of nonempty sets. \\
 Set $E = \displaystyle\bigcup_{x \in X}E_x.$ \\
 Then, there exists a function
@@ -73,3 +73,63 @@ A Boolean homomorphism is a function $h:B\to B'$ between Boolean algebras that i
 	h(a \wedge b) &= h(a) \wedge h(b), \text{ and} \\
 	h(\neg a) &= \neg h(a).
 \end{align*}
+%
+\subsection{Topological spaces}
+A \textbf{\emph{topology}} on a set $X$ is a collection $\mathcal{T}$ of subsets of $X$ having the following properties:
+\begin{itemize} 
+\item $\emptyset$ and $X$ are in $\mathcal{T}.$
+\item The union of elements of any subcollection of $\mathcal{T}$ is in $\mathcal{T}.$
+\item The intersection of the elements of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}.$
+\end{itemize}
+If $X$ is a topological space with topology $\mathcal{T}$, we say that a subset $U$ of $X$ is an \textbf{\emph{open set}} of $X$ if $U$ belongs to the collection $\mathcal{T}.$\\
+In this text, we shall write $O(X)$ to denote $\mathcal{T},$ id est, the collection of open sets.
+%
+\subsection{Equivalence relations and Quotients} \label{equivrel}
+Let $X$ be a set. A \emph{relation} $R$ \emph{on} $X$ is a subset $R \subset X \subset X.$ We write ``$aRb$'' to mean ``$(a, b) \in R$.''\\
+Let $\sim$ be a relation on $X.$ We say that $\sim$ is an \emph{equivalence relation} on $X$ if the following holds for all $x, y, z \in X:$
+\begin{itemize}
+	\item (Reflexive) $x \sim x,$
+	\item (Symmetric) $x \sim y$ implies $y \sim x,$
+	\item (Transitive) $x \sim y$ and $y \sim z$ implies $x \sim z.$
+\end{itemize}
+Given such a relation, one defines the \emph{equivalence class} $[x]$ of an element $x \in X$ by
+
+\begin{equation*} 
+	[x] = \{y \in  X \mid x \sim y\}.
+\end{equation*}
+
+The various different equivalence classes $[x]$ then form a \emph{partition} of $X,$ that is:
+\begin{itemize}
+	\item Each equivalence class is nonempty,
+	\item Any two distinct equivalence classes are disjoint, and
+	\item The union of all equivalence classes is $X.$
+\end{itemize}
+(That the above is true is an exercise.)\\
+In particular, given any $x \in X,$ there exists a unique equivalence class to which $x$ belongs.\\
+The set of all equivalence classes
+
+\begin{equation*} 
+	X/\sim = \{[x] \mid x \in X\}
+\end{equation*}
+is called the \emph{quotient} of $X$ by $\sim.$ it is used in place of $X$ when one wants to ``abstract away'' the difference between equivalent elements $x \sim y,$ in the sense that in $X/\sim$ such (and only such) elements are identified, since
+
+\begin{equation*} 
+	[x] = [y] \; \text{iff} \; x \sim y.
+\end{equation*}
+Observe that the \emph{quotient mapping},
+
+\begin{equation*} 
+	q:X \to X/\sim
+\end{equation*}
+defined as $x \mapsto [x]$ has the property that a map $f:X\to Y$ extends along w,
+
+\begin{equation*} 
+	\begin{tikzcd}
+		X \arrow[rr, "q"] \arrow[rrddd, "f"'] && X/\sim \arrow[ddd, dotted]\\
+		&&\\&&\\
+		&& Y
+	\end{tikzcd}
+\end{equation*}
+precisely when $f$ respects the equivalence relation, in the sense that $x \sim y$ implies $f(x) = f(y).$ (The converse need not be true.)
+
+This concept extends to many other cases of taking more sophisticated quotients in the cases of monoids, groups, topological spaces, et cetera.
