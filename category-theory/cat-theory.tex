@@ -9,6 +9,7 @@
 \usepackage{datetime2}
 
 \theoremstyle{definition}
+\newtheorem{joke}{Joke}
 \newtheorem{thm}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
@@ -16,6 +17,7 @@
 \newtheorem{defn}[thm]{Definition}
 
 \usepackage{chngcntr}
+\numberwithin{joke}{section}
 \numberwithin{thm}{section}
 \numberwithin{equation}{section}
 
@@ -84,5 +86,211 @@
 \input{sec0.tex}
 \input{sec1.tex}
 \input{sec2.tex}
+\sec{Duality}
+\subsection{The Duality Principle}
+Let us recall the definition of a category: There are two kinds of \emph{things}, objects $A, B, C,\ldots$ and arrows $f, g, h, \ldots;$ four operations $\dom(f), \cod(f), 1_A, g \circ f;$ and these satisfy the following seven axioms:
+\begin{align} 
+  \dom(1_A) = A &\qquad \cod(1_A) = A\nonumber\\
+  f\circ1_{\dom(f)} = f &\qquad 1_{\cod(f)}\circ f = f \label{catax}\\
+  \dom(g\circ f) = \dom(f) &\qquad \cod(g\circ f) = \cod(g)\nonumber\\
+  h\circ(g\circ f) &= (h\circ g) \circ f\nonumber
+\end{align}
+Where the operation ``$g\circ f$'' is defined precisely when
+\begin{equation*} 
+  \dom(g) = \cod(f),
+\end{equation*}
+so a suitable form of this should occur as a condition on each equation containing $\circ,$ as in $\dom(g) = \cod(f) \implies \dom(g\circ f) = \dom(f).$\\
+Now, given any sentence $\Sigma$ in the elementary language of category theory, we can form the ``dual statement'' $\Sigma^*$ by making the following replacements:
+\begin{align*} 
+  f\circ g \; &\text{for} \; g \circ f,\\
+  \cod \; &\text{for} \; \dom,\\
+  \dom \; &\text{for} \; \cod.
+\end{align*}
+It is easy to see that after these replacements, the statement will again be well formed. Next, suppose that we have shown a statement $\Sigma$ to entail one $\Delta,$ that is, $\Sigma \implies \Delta,$ without using any of the category axioms. Then, it follows that $\Sigma^* \implies \Delta^*.$ This is because the substituted terms are mere undefined constants if we don't use any category axioms.\\
+However, now observe that the axioms (\ref{catax}) for category theory (CT) are themselves ``self-dual,'' in the sense that we have,
+\begin{equation*} 
+  \text{CT}^* = \text{CT}.
+\end{equation*}
+We now have the following \emph{duality principle}.
+%
+\begin{prop}[formal duality]
+  For any sentence $\Sigma$ in the language of category theory, if $\Sigma$ follows from the axioms of categories, then do foes its dual $\Sigma^*$:
+  \begin{equation*} 
+    \text{CT} \implies \Sigma \; \text{implies} \; \text{CT} \implies \Sigma^*.
+  \end{equation*}
+\end{prop}
+Taking a more conceptual point of view, note that if a statement $\Sigma$ involves some diagram of objects and arrows,
+\begin{equation*} 
+  \begin{tikzcd}
+    A \arrow[rr, "f"] \arrow[rrddd, "g\circ f"'] && B\arrow[ddd, "g"]\\
+    &&\\&&\\
+    &&C
+  \end{tikzcd}
+\end{equation*}
+then the dual statement $\Sigma^*$ involves the diagram obtained from it by reversing the direction and the order of composition of arrows.
+\begin{equation*} 
+  \begin{tikzcd}
+  A &  & B \arrow[ll, "f"']                            \\
+    &  &                                               \\
+    &  &                                               \\
+    &  & C \arrow[lluuu, "f\circ g"] \arrow[uuu, "g"']
+  \end{tikzcd}
+\end{equation*}
+Recalling the opposite category $\mathbf{C}\op$ of a category $\mathbf{C},$ we see that an interpretation of a statement $\Sigma$ in $\mathbf{C}$ automatically gives an interpretation of $\Sigma^*$ in $\mathbf{C}\op.$\\
+Now suppose that a statement $\Sigma$ holds for all categories $\mathbf{C}.$ Then, it also holds in all categories $\mathbf{C}\op,$ and so $\Sigma^*$ holds in all categories $(\mathbf{C}\op)\op.$ But since for every category $\mathbf{C},$
+\begin{equation*} 
+  (\mathbf{C}\op)\op= \mathbf{C},
+\end{equation*}
+we see that $\Sigma^*$ also holds in all categories $\mathbf{C}.$ We therefore have the following form of conceptual form of the duality principle.
+\begin{prop}[conceptual duality]
+  For any statement $\Sigma$ about categories, if $\Sigma$ holds for all categories, then so does the dual statement $\Sigma^*.$
+\end{prop}
+%
+\subsection{Coproducts}
+Let us consider the example of products and see what the dual notion must be. We first recall the definition of product.
+\begin{defn} 
+  A diagram \begin{tikzcd}A & P \arrow[l, "p_1"'] \arrow[r, "p_2"] & B\end{tikzcd} is a \emph{product} of $A$ and $B,$ if for any $Z$ and \begin{tikzcd}A & Z \arrow[l, "z_1"'] \arrow[r, "z_2"] & B\end{tikzcd} there is a unique $u:Z\to P$ with $p_i \circ u = z_i,$ all as indicated in
+  \begin{equation*} 
+    \begin{tikzcd}
+    &  & Z \arrow[llddd, "z_1"'] \arrow[rrddd, "z_2"] \arrow[ddd, "u", dotted] &  &   \\
+    &  &                                                                       &  &   \\
+    &  &                                                                       &  &   \\
+  A &  & P \arrow[ll, "p_1"] \arrow[rr, "p_2"']                                &  & B
+  \end{tikzcd}
+  \end{equation*}
+\end{defn}
+Now what is the dual statement? The reader is encouraged to write the dual statement themselves and compare it with the next definition. The convention is to use the prefix ``co-'' to indicate the dual notion. Thus, we get the definition of a \emph{co-}product as follows.
+\begin{defn} 
+A diagram \begin{tikzcd}A \arrow[r, "q_1"] & Q & B \arrow[l, "q_2"']\end{tikzcd} is a \emph{coproduct} of $A$ and $B,$ if for any $Z$ and \begin{tikzcd}A \arrow[r, "z_1"] & Z & B \arrow[l, "z_2"']\end{tikzcd} there is a unique $u:Q\to Z$ with $u \circ q_i = z_i,$ all as indicated in
+
+  \begin{equation*} 
+    \begin{tikzcd}
+    && Z&&\\
+    &&  &&\\&&  &&\\
+    A \arrow[rr, "q_1"'] \arrow[rruuu, "z_1"] &  & Q \arrow[uuu, "u"', dotted] &
+    & B \arrow[ll, "q_2"] \arrow[lluuu, "z_2"']
+    \end{tikzcd} 
+  \end{equation*}
+\end{defn}
+We usually write \begin{tikzcd}A \arrow[r, "i_1"] & A+B & B \arrow[l, "i_2"']\end{tikzcd} for the coproduct and $[f, g]$ for the uniquely determined arrow $u:A+B \to Z.$ The ``coprojections'' $i_1:A \to A+B$ and $i_2:B\to A+B$ are usually called \emph{injections}, with no deeper meaning.
+
+A coproduct is therefore, precisely the product of the objects in the opposite category. This immediately gets a lot of examples of coproducts. However, the opposite category of a familiar category is not really very familiar. Let us look at some more familiar categories and coproducts there.
+
+\hrulefill
+
+However, before we see examples, a joke:
+\begin{joke}
+A mathematician is a person who turns coffee into theorems.\\
+A comathematician is a coperson who turns cotheorems into ffee.
+\end{joke}
+\hrulefill
+
+\example{}  In $\mathsf{Set},$ the coproduct $A+B$ of two sets is their disjoint union which can be constructed, for example, as
+\begin{equation*} 
+  A + B = \{(a, 1) \mid a \in A\} \cup \{(b, 2) \mid b \in B\}
+\end{equation*}
+with evident coproduct injections as
+\begin{equation*} 
+  i_1(a) = (a, 1), \quad i_2(b) = (b, 2).
+\end{equation*}
+Given any functions $f$ and $g$ as in
+\begin{equation*} 
+  \begin{tikzcd}
+    A \arrow[rr, "f"] && Z && B \arrow[ll, "g"']
+  \end{tikzcd},
+\end{equation*}
+we define $[f, g]:A+B \to Z$ as
+\begin{equation*} 
+  [f, g](x, \delta) = \begin{cases}
+    f(x) & \delta = 1\\
+    g(x) & \delta = 2.
+  \end{cases}
+\end{equation*}
+It can be verified that $[f, g]\circ i_1 = f$ and $[f, g]\circ i_2 = g.$\\
+Moreover, given any $h:A+B \to Z$ with $h\circ i_1 = f$ and $h\circ i_2 = g,$ we must have $h = [f, g].$\\
+Thus, every pair of objects in $\mathsf{Set}$ does have a coproduct.\\
+Also, note that in $\mathsf{Set},$ every finite set is a coproduct:
+\begin{equation*} 
+  A \cong \underbrace{1 + 1 + \cdots + 1}_{n \text{ times}}
+\end{equation*}
+for $n = \operatorname{card}(A).$ This is because a function $f:A \to Z$ is uniquely determined by its values $f(a)$ for all $a \in A.$ (This also encapsulates the fact that one may define $f(a)$ in \emph{any} way for each $a \in A$ and still get a function $f:A\to Z.$ This is in contrast to something more structured like a monoid where the arrows must satisfy some further constraints.)
+
+\example{} If $M(A)$ and $M(B)$ are \emph{free} monoids on sets $A$ and $B,$ then in $\mathbf{Mon},$ we can construct there coproduct as
+\begin{equation*} 
+  M(A) + M(B) \cong M(A+B),
+\end{equation*}
+where $A+B$ is the coproduct of sets, id est, their disjoint union as defined above.\\
+The injections are the natural inclusions.\\
+One can see that this is a coproduct directly by considering words over $A + B,$ but it also follows abstractly by using the diagram.
+\begin{equation} \label{diag:moncoprod}
+  \begin{tikzcd}
+    && N&&\\&&&&\\&&&&\\&&&&\\
+    M(A) \arrow[rruuuu] \arrow[rr]&  & 
+    M(A+B) \arrow[uuuu, dotted]    &  & M(B) \arrow[lluuuu] \arrow[ll]
+    \\&&&&\\&&&&\\
+    A \arrow[uuu, "\eta_A"] \arrow[rr] &  & A+B \arrow[uuu, "\eta_{A+B}"] 
+    && B \arrow[ll] \arrow[uuu, "\eta_B"']
+  \end{tikzcd}
+\end{equation}
+in which the $\eta$s are the respective insertion of generators. (Recall this from \S\S\ref{ssec:free}.)\\
+(Note that there's actually an abuse of notation in the above diagram as we objects from both $\mathsf{Set}$ and $\mathsf{Mon}$ in it. This will carry on for the rest of this example.)\\
+The UMPs of $M(A), M(B), A+B,$ and $M(A+B)$ then imply that $M(A+B)$ has the required UMP of $M(A) + M(B).$ We look at this in more detail as follows:\\
+The injections $i_1 : M(A) \to M(A + B)$ and $i_2 : M(B) \to M(A + B)$ are defined to be precisely those that make the squares in (\ref{diag:moncoprod}) commute. (Their existence and uniqueness are given by the UMP of free monoids.)\\
+Now we show that $M(A + B)$ has the desired UMP given these injections.\\
+Let $f:M(A) \to N$ and $g:M(B) \to N$ be monoid homomorphisms. We want to show the existence of a unique monoid homomorphism $u:M(A + B) \to N$ that makes the two triangles commute.\\
+\textbf{Existence}: Consider the arrows $f\circ\eta_A:A\to N$ and $g\circ\eta_B:B\to N$ (in $\mathsf{Set}$). By the UMP of $A + B,$ there exists $h:A+B \to N$ making the following diagram commute.
+\begin{equation} \label{diag:coprodmon2}
+  \begin{tikzcd}
+  && N &&\\&&&&\\&&&&\\
+  M(A) \arrow[rruuu, "f"]            &  &                         &  & M(B) \arrow[lluuu, "g"']\\&&&&\\&&&&\\
+  A \arrow[uuu, "\eta_A"] \arrow[rr, "i_1'"'] &  & A+B \arrow[uuuuuu, "h"] &  & B \arrow[ll, "i_2'"] \arrow[uuu, "\eta_B"']
+  \end{tikzcd}
+\end{equation}
+Now, using the UMP of the free monoid $M(A + B),$ get a monoid homomorphism $u:M(A + B) \to N$ such that $u\circ\eta_{A+B} = h.$\\
+Now, we show that this $u$ makes the triangles commute. We show this for the left triangle. We first observe that $f\circ \eta_A = u \circ i_1 \circ \eta_A.$ This was because $h = u \circ \eta_{A+B}$ and the fact that the left square commuted. And also note that
+\begin{align*} 
+  f\circ \eta_A = u \circ i_1 \circ \eta_A \implies f = u \circ i_1.
+\end{align*}
+This above follows from the UMP of $M(A).$\\
+Similarly, we get that the right triangle commutes.\\
+\textbf{Uniqueness}: Let $v:M(A+B) \to N$ be another monoid homomorphism making (\ref{diag:moncoprod}) commute. Then (\ref{diag:coprodmon2}) also commuted with $v\circ \eta_{A+B}$ instead of $h.$ However, by the UMP of $M(A+B),$ this forces $h = v\circ \eta_{A+B},$ id est, $u \circ \eta_{A+B} = v \circ \eta_{A+B}.$ This clearly forces $u = v,$ as desired.
+  
+Note: twice in the above have we used that $f\circ \eta = g\circ\eta \implies f = g.$ This had not been proven earlier but is an easy consequence of the UMP. This is left to the reader.
+
+The foregoing examples says precisely that the free monoid functor $M:\mathsf{Set} \to \mathsf{Mon}$ preserves coproducts.
+
+\example{} In $\mathsf{Top},$ the coproduct of two topological spaces $X$ and $Y$ is the space $X + Y$ defined as follows:\\
+As a set, $X + Y$ is simply the disjoint union of $X$ and $Y,$ id est, the coproduct in $\mathsf{Set}.$\\
+A set $U \subset X + Y$ is open iff $U \cap X$ is open and $U \cap Y$ is open. (Considering our previous construction of coproduct in $\mathsf{Set},$ we should write $U \cap (X \times \{1\})$ with the understanding that $X \times \{1\}$ has the topology $O(X) \times \{1\}.$)\\
+The injections are the same as in $\mathsf{Set}.$ It is an easy verification that these injections are indeed arrows in $\mathsf{Top},$ id est, these are continuous.\\
+Moreover, given any $z_1, z_2, Z$ as in the definition, it can be verified that the arrow $u:X+Y \to Z$ obtained in $\mathsf{Set}$ is indeed an arrow in $\mathsf{Top},$ id est, it is continuous.
+
+\example{} Coproducts of posets are similarly constructed from the coproducts of the underlying sets, by ``putting them side by side.'' That is, given posets $P$ and $Q,$ the poset $P+Q$ is simply a poset on the disjoint union $P + Q$ with the relation as inherited from earlier without any additional ones.\\
+What about ``rooted posets'', id est, posets with a distinguished initial element $0?$ In the category $\mathsf{Pos}_0$ of such posets and monotone maps that preserve $0,$ one constructs the coproduct of two such posets $P$ and $Q$ from the coproduct $P + Q$ in the category $\mathsf{Pos},$ by ``identifying'' the two different $0$s,
+
+\begin{equation*} 
+  A +_{\mathsf{Pos}_0} B = (A +_{\mathsf{Pos}} B)/\text{``}0_A = 0_B\text{''}.
+\end{equation*}
+(Recall \nameref{equivrel}.)
+
+Recall the example of product in a poset (viewed as a category). There we had gotten the product to be the greatest lowest bound of two elements. Dually, one can consider the question of coproduct in a poset. The answer is not surprising.
+
+\example{} Let $P$ be a fixed poset and $p, q \in P.$ Suppose $p + q$ exists. Then we have
+
+\begin{equation*} 
+  p \le p + q \quad \text{and} \quad q \le p + 1
+\end{equation*}
+and if 
+
+\begin{equation*} 
+  p \le z \quad \text{and} \quad p \le z
+\end{equation*}
+then
+
+\begin{equation*} 
+  p + q \le z.
+\end{equation*}
+So, $p + q = p \vee q$ is the join, or \emph{least upper bound} of $p$ and $q.$\\
+(Of course, it is not necessary that joins exist.)
 \input{ack.tex}
 \end{document}
