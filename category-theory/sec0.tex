@@ -1,7 +1,7 @@
 \sec{Preliminaries}
 These are not strictly preliminaries, in the sense that you do not \emph{need} to know these to understand the text. However, since the examples do rely on these, it's certainly beneficial to know these.\\
 The reader may skip these at the beginning and return to these whenever the text demands it.
-\subsection{Axiom of Choice}
+\subsection{Axiom of Choice}\label{axiomofchoice}
 Given a collection $\mathcal{B}$ of nonempty sets, there exists a function
 \begin{equation*} 
 	f:\mathcal{B} \to \bigcup_{B \in \mathcal{B}}B
@@ -83,6 +83,10 @@ A \textbf{\emph{topology}} on a set $X$ is a collection $\mathcal{T}$ of subsets
 \end{itemize}
 If $X$ is a topological space with topology $\mathcal{T}$, we say that a subset $U$ of $X$ is an \textbf{\emph{open set}} of $X$ if $U$ belongs to the collection $\mathcal{T}.$\\
 In this text, we shall write $O(X)$ to denote $\mathcal{T},$ id est, the collection of open sets.
+
+Given topological spaces $X$ and $Y,$ a function $f:X\to Y$ is said to be open if the preimage of every open set is open. That is to say, if $V \in O(Y),$ then $f^{-1}(V) \in O(X).$
+
+(To recall, $f^{-1}(V) = \{x \in X \mid f(x) \in V\}.$)
 %
 \subsection{Equivalence relations and Quotients} \label{equivrel}
 Let $X$ be a set. A \emph{relation} $R$ \emph{on} $X$ is a subset $R \subset X \subset X.$ We write ``$aRb$'' to mean ``$(a, b) \in R$.''\\
