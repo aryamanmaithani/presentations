@@ -110,7 +110,7 @@ To see this, let $f:X \mono A$ be a mono with $X \neq \emptyset.$ Pick some $x_0
 	\end{cases}
 \end{equation*}	
 In view of $f$ being monic (and hence, injective), the above function is well defined and the reader may verify that $gf = 1_X.$\\
-Let us look at the more interesting condition of an epi splitting.
+Let us look at the more interesting condition of an epi splitting. (Recall \nameref{axiomofchoice}.)
 \begin{lem} \label{lem:episplit}
 	In $\mathsf{Set},$ the condition that every epi splits is equivalent to the axiom of choice.
 \end{lem}
@@ -498,14 +498,12 @@ To show that this map preserves preserves composition, one may observe diagram (
 
 \begin{equation} \label{diag:prodcomp}
 	\begin{tikzcd}
-A \arrow[ddd, "f"'] &  & A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] \arrow[ddd, "f\times f'", dashed] &  & A' \arrow[ddd, "f'"] \\
-                    &  &                                                                                    &  &                      \\
-                    &  &                                                                                    &  &                      \\
-B \arrow[ddd, "g"'] &  & B\times B' \arrow[ll, "q_1"] \arrow[rr, "q_2"'] \arrow[ddd, "g\times g'", dashed]  &  & B' \arrow[ddd, "g'"] \\
-                    &  &                                                                                    &  &                      \\
-                    &  &                                                                                    &  &                      \\
-C                   &  & C\times C' \arrow[ll, "r_1"'] \arrow[rr, "r_2"]                                    &  & C'                  
-\end{tikzcd}
+	A \arrow[ddd, "f"'] &  & A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] \arrow[ddd, "f\times f'", dashed] &  & A' \arrow[ddd, "f'"] \\
+	&&&&\\&&&&\\
+	B \arrow[ddd, "g"'] &  & B\times B' \arrow[ll, "q_1"] \arrow[rr, "q_2"'] \arrow[ddd, "g\times g'", dashed]  &  & B' \arrow[ddd, "g'"] \\
+	&&&&\\&&&&\\
+	C&& C\times C' \arrow[ll, "r_1"'] \arrow[rr, "r_2"]&& C'                  
+	\end{tikzcd}
 \end{equation}
 One may now define a ternary product
 \begin{equation*} 
