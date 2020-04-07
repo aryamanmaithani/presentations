@@ -89,51 +89,114 @@ Given topological spaces $X$ and $Y,$ a function $f:X\to Y$ is said to be open i
 (To recall, $f^{-1}(V) = \{x \in X \mid f(x) \in V\}.$)
 %
 \subsection{Equivalence relations and Quotients} \label{equivrel}
-Let $X$ be a set. A \emph{relation} $R$ \emph{on} $X$ is a subset $R \subset X \subset X.$ We write ``$aRb$'' to mean ``$(a, b) \in R$.''\\
-Let $\sim$ be a relation on $X.$ We say that $\sim$ is an \emph{equivalence relation} on $X$ if the following holds for all $x, y, z \in X:$
+Let $B$ be a set. A \emph{relation} $R$ \emph{on} $B$ is a subset $R \subset B \times B.$ We write ``$aRb$'' to mean ``$(a, b) \in R$.''\\
+Let ${\sim}$ be a relation on $B.$ We say that ${\sim}$ is an \emph{equivalence relation} on $B$ if the following holds for all $x, y, z \in B:$
 \begin{itemize}
 	\item (Reflexive) $x \sim x,$
 	\item (Symmetric) $x \sim y$ implies $y \sim x,$
-	\item (Transitive) $x \sim y$ and $y \sim z$ implies $x \sim z.$
+	\item (Transitive) $x \sim y$ and $y \sim z$ implies $x {\sim} z.$
 \end{itemize}
 Given such a relation, one defines the \emph{equivalence class} $[x]$ of an element $x \in X$ by
 
 \begin{equation*} 
-	[x] = \{y \in  X \mid x \sim y\}.
+	[x] = \{y \in  B \mid x \sim y\}.
 \end{equation*}
 
-The various different equivalence classes $[x]$ then form a \emph{partition} of $X,$ that is:
+The various different equivalence classes $[x]$ then form a \emph{partition} of $B,$ that is:
 \begin{itemize}
 	\item Each equivalence class is nonempty,
 	\item Any two distinct equivalence classes are disjoint, and
-	\item The union of all equivalence classes is $X.$
+	\item The union of all equivalence classes is $B.$
 \end{itemize}
 (That the above is true is an exercise.)\\
-In particular, given any $x \in X,$ there exists a unique equivalence class to which $x$ belongs.\\
+In particular, given any $x \in B,$ there exists a unique equivalence class to which $x$ belongs.\\
 The set of all equivalence classes
 
 \begin{equation*} 
-	X/\sim = \{[x] \mid x \in X\}
+	B/{\sim} = \{[x] \mid x \in B\}
 \end{equation*}
-is called the \emph{quotient} of $X$ by $\sim.$ it is used in place of $X$ when one wants to ``abstract away'' the difference between equivalent elements $x \sim y,$ in the sense that in $X/\sim$ such (and only such) elements are identified, since
+is called the \emph{quotient} of $X$ by ${\sim}.$ it is used in place of $B$ when one wants to ``abstract away'' the difference between equivalent elements $x \sim y,$ in the sense that in $B/{\sim}$ such (and only such) elements are identified, since
 
 \begin{equation*} 
 	[x] = [y] \; \text{iff} \; x \sim y.
 \end{equation*}
-Observe that the \emph{quotient mapping},
+We have a natural (surjective) map $B \to B/{\sim}$ called the \emph{quotient mapping},
 
 \begin{equation*} 
-	q:X \to X/\sim
+	q:B \to B/{\sim}
 \end{equation*}
-defined as $x \mapsto [x]$ has the property that a map $f:X\to Y$ extends along w,
+defined as $x \mapsto [x].$ 
+
+\begin{defn} 
+	Let $R$ be a relation on a set $B$ and $f:B\to Z$ be a function.\\
+	We say that ``$f$ respects $R$'' if $f(b) = f(b')$ whenever $(b, b') \in R.$
+\end{defn}
+
+\begin{prop} \label{prop:fextend}
+The quotient mapping has the property that a map $f:B\to Z$ extends (uniquely) as,
+\begin{equation*} 
+	\begin{tikzcd}
+		B \arrow[rr, "q"] \arrow[rrddd, "f"'] && B/{\sim} \arrow[ddd, "\bar{f}" ,dotted]\\
+		&&\\&&\\
+		&& Z
+	\end{tikzcd}
+\end{equation*}
+precisely when $f$ respects the equivalence relation.
+\end{prop}
+\begin{proof} 
+	Note that if the map $f$ extends, then it must respect the relation. For if $x \sim y,$ then $q(x) = q(y)$ and $f(x) = \bar{f}(q(x)) = \bar{f}(q(y)) = f(y).$\\~\\
+	Conversely, suppose that $f$ respects $\sim.$ Then, define $\bar{f}:B/{\sim} \to Y$ as follows:
+	\begin{equation*} 
+		\bar{f}([x]) = f(x).
+	\end{equation*}
+	We must verify that the above is indeed well-defined, id est, $f(x) = f(y)$ whenever $[x] = [y].$ However, this is precisely what it means to say that $f$ respects $\sim.$\\
+	The uniqueness follows from the fact that $q$ is surjective.
+\end{proof}
+
+%This concept extends to many other cases of taking more sophisticated quotients in the cases of monoids, groups, topological spaces, et cetera.\\~\\
+
+\textbf{Equivalence closure}: Suppose we are given an arbitrary relation $R$ on some set $B.$ We can construct a relation ${\sim}$ on $B$ which is the \emph{smallest} equivalence relation containing $R$. This is constructed as follows:\\
+Let $\mathcal{E}$ be the set of all equivalence relations on $B$ containing $R,$ id est,
+\begin{equation*} 
+	\mathcal{E} = \{E \subset B \times B \mid R \subset E \text{ and } E \text{ is an equivalence relation}\}.
+\end{equation*}
+
+Then, 
+\begin{equation*} 
+	{\sim} = \bigcap_{E \in \mathcal{E}}E.
+\end{equation*}
+It can be verified that ${\sim}$ is an equivalence relation. (Intersection of any family of equivalence relation is an equivalence relation.) Moreover, $R \subset {\sim}.$ We also have that ${\sim} \subset E$ for any equivalence relation $E \supset R.$\\~\\
+We say that ${\sim}$ is the equivalence relation \emph{generated} by $R.$
+
+We now observe a crucial property of this closure which is later used in \S\S\ref{ssec:coeq}.\\
+Let the notations be the same as earlier. Let $f:B\to Z$ be a function.\\
+As before, we let ${\sim}$ denote the equivalence relation generated by $R$ and $q:B \to B/{\sim}$ be the projection mapping, all as depicted in the following diagram.
 
 \begin{equation*} 
 	\begin{tikzcd}
-		X \arrow[rr, "q"] \arrow[rrddd, "f"'] && X/\sim \arrow[ddd, dotted]\\
+		B \arrow[rr, "q"] \arrow[rrddd, "f"'] && B/{\sim}\\
 		&&\\&&\\
-		&& Y
+		&& Z
 	\end{tikzcd}
 \end{equation*}
-precisely when $f$ respects the equivalence relation, in the sense that $x \sim y$ implies $f(x) = f(y).$ (The converse need not be true.)
 
-This concept extends to many other cases of taking more sophisticated quotients in the cases of monoids, groups, topological spaces, et cetera.
+\begin{prop}
+	If $f:B\to Z$ respects $R,$ then there exists a (unique) function $\bar{f}:B/{\sim} \to Z$ such $\bar{f}\circ q = f.$
+\end{prop}
+\begin{proof} 
+	We first define an equivalence relation $\approx$ on $B$ as 
+	\begin{equation*} 
+		b \approx b' \text{ iff } f(b) = f(b').
+	\end{equation*}
+	(This can easily be verified to be an equivalence relation.)\\
+	\textbf{Claim 1.} $R \subset \ \approx.$\\
+	\emph{Proof.} $(b, b)' \in R \implies f(b) = f(b') \implies (b, b') \in \ \approx.$ \\
+	(The first implication follows from the fact that $f$ respects $R.$)\\~\\
+	Now, from the definition of $\sim,$ it follows that ${\sim} \subset {\approx}.$\\
+	However, this means that $f$ respects $\sim$ as well. Indeed,
+	\begin{align*} 
+		b \sim b' &\implies b \approx b'\\
+		&\implies f(b) = f(b').
+	\end{align*}
+	The result now follows by Proposition \ref{prop:fextend}.
+\end{proof}
