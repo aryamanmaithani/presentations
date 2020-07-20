@@ -1,10 +1,10 @@
-\documentclass[handout]{beamer}
+\documentclass[handout, dvipsnames]{beamer}
 \mode<presentation>{}
 \usepackage[utf8]{inputenc}
 % \newcommand{\fl}[1]{\left\lfloor #1 \right\rfloor}
 \usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
 \setbeamertemplate{theorems}[numbered]
-
+% \usepackage[dvipsnames]{xcolor}
 \title{Group Theory}
 \author{Aryaman Maithani}
 \date[20-07-2020]{20th July 2020}
@@ -60,8 +60,9 @@
         \uncover<8->{\item $-$ is also a binary operation on the above sets but $\div$ is not.}
         \uncover<9->{\item $+$ is a binary operation on $\mathbb{N}$ but $-$ is not.}
         \uncover<10->{\item $+$ and $\cdot$ modulo $n$ are binary operations on $\{0, \ldots, n-1\}.$}
+        \uncover<11->{\item $\times$ (cross product) is a binary operation on $\mathbb{R}^3.$}
     \end{itemize}}
-    \uncover<11->{Now, we define what a group is.}
+    \uncover<12->{Now, we define what a group is.}
 \end{frame}
 \begin{frame}{What is a group?}
     \uncover<1->{\begin{defn}[Group]
@@ -114,13 +115,13 @@
 \end{frame}
 \begin{frame}{Notations}
     Let $G$ be a group and $x \in G.$ We define $x^n$ for $n \in \mathbb{Z}$ as follows:\\~\\
-    $x^0 \vcentcolon= e.$\\
-    For $n > 0,$ we write $x^n$ to mean
+    $x^0 \vcentcolon=$\uncover<2->{$e.$}\\
+    For $n > 0,$ we define
     \begin{equation*} 
-        \underbrace{x \cdot x \cdots  x}_{n \text{ times}}.
+        x^n \vcentcolon= \uncover<3->{\underbrace{x \cdot x \cdots  x}_{n \text{ times}}.}
     \end{equation*}
-    For $n < 0,$ we have $x^n := (x^{-1})^{-n},$ which is the same as $(x^{-n})^{-1}.$ (Prove!)\\~\\
-    It is convention to write $+$ as the group operation for abelian groups.
+    For $n < 0,$ we have $x^n :=$\uncover<4->{$(x^{-1})^{-n}$}, which is the same as \uncover<5->{$(x^{-n})^{-1}.$} (Prove!)
+    % It is convention to write $+$ as the group operation for abelian groups.
 \end{frame}
 \begin{frame}{Orders}
     \uncover<2->{
@@ -199,21 +200,22 @@
     Let $H$ be a subgroup of $G.$ \uncover<2->{For $g \in G,$ we define $g\cdot H$ as
     \begin{equation*} 
         g\cdot H \vcentcolon= \{g\cdot h : h \in H\}.
-    \end{equation*} }\\
-    \uncover<3->{\begin{defn}[Coset]
+    \end{equation*} }
+    \uncover<3->{\vspace{-0.9cm}\begin{defn}[Coset]
         A \emph{(left) coset} of $H$ is a set of the form $g\cdot H.$
-    \end{defn} }
-    \uncover<4->{Define $G/H$ be the set of cosets, that is,
+    \end{defn} 
+    $g$ is said to be {\color{red}{a}} representative of the coset $g\cdot H.$}\\
+    \uncover<4->{We define $G/H$ be the set of cosets, that is,
     \begin{equation*} 
         G/H  \vcentcolon= \{gH : g \in G\}.
     \end{equation*} }
-    \uncover<5->{Note that different elements could correspond to the same coset. }\uncover<6->{In fact, we now see precisely when that is possible. }
+    \uncover<5->{Note that different elements could correspond to the same coset. That is, a coset may have different representatives. }\uncover<6->{In fact, we now see precisely when that is possible. }
 \end{frame}
 \begin{frame}{Properties of cosets}
     \begin{prop}[Equality of cosets]
         Let $a, b \in G.$ Then, 
         \begin{equation*} 
-            aH = bH \text{ iff } b^{-1}a \in H.
+            aH = bH \text{ iff } b^{-1}aH = H \text{ iff } b^{-1}a \in H.
         \end{equation*}
     \end{prop}
     \uncover<2->{This tells us that if $c \in aH,$ then $aH = cH.$} \uncover<3->{This also leads to the following result. }
@@ -263,10 +265,10 @@
 \end{frame}
 
 \begin{frame}{Homomorphisms}
-    What we consider now is another common theme in mathematics. \uncover<2->{Given two objects of the same type (for example, given two groups), we consider functions between them. }\uncover<3->{However, we don't just consider any function. We study some particular type of functions. }\\
+    What we consider now is another common theme in mathematics. \uncover<2->{Given two objects of the same type (for example, given two groups), we consider functions between them. }\uncover<3->{However, we don't just consider any function. We study some particular type of functions. }\\~\\
     \uncover<4->{Do you recall what particular type of functions (between vector spaces) we considered in linear algebra? }\\
-    \uncover<5->{Similar to that, we consider functions that preserve the ``structure'' of the objects in consideration. }\\
-    \uncover<6->{The case of groups is particularly simple since there's pretty one much thing that gives the group its structure, the operation $\cdot$. }\\
+    \uncover<5->{Similar to that, we consider functions that preserve the ``structure'' of the objects in consideration. }\\~\\
+    \uncover<6->{The case of groups is particularly simple since there's pretty one much thing that gives the group its structure, the group operation. }\\
     \uncover<7->{This leads to the following definition. }
 \end{frame}
 \begin{frame}{Homomorphisms}
@@ -322,8 +324,8 @@
     \end{itemize}
 \end{frame}
 \begin{frame}{Isomorphisms}
-    Homomorphisms lead to another equally recurring concept in mathematics. \uncover<2->{The concept of isomorphism. }\uncover<3->{Loosely speaking, an isomorphism captures two structures to be ``equivalent.'' }\\
-    \uncover<4->{For example, consider the group $\{0, 1, 2\}$ with addition modulo $3$ and the group $\{1, \omega, \omega^2\}$ with multiplication. ($\omega = \exp\left(\frac{2\pi}{3}i\right).$) }\\
+    Homomorphisms lead to another equally recurring concept in mathematics. \uncover<2->{The concept of isomorphism. }\uncover<3->{Loosely speaking, an isomorphism captures two structures to be ``equivalent.'' }\\~\\
+    \uncover<4->{For example, consider the group $\{0, 1, 2\}$ with addition modulo $3$ and the group $\{1, \omega, \omega^2\}$ with multiplication. ($\omega = \exp\left(\frac{2\pi}{3}i\right).$) }\\~\\
     \uncover<5->{While the groups are not equal (since they don't have the same element), they pretty much are same in terms of the group properties. }\\
     \uncover<6->{This idea can formalised as follows. }
 \end{frame}
@@ -376,24 +378,98 @@
         \{aka^{-1} : k \in K\}.
     \end{equation*} }\\
     \uncover<4->{In fact, since the above is true for all $a \in G,$ it is also true for $a^{-1}$ and we actually get the equality $aKa^{-1} = K.$ }\\~\\
-    \uncover<5->{This can be written in yet another way as $aK = Ka.$ }
+    \uncover<5->{This can be written in yet another way as ${\color{orange}{aK = Ka}}.$ }
 \end{frame}
 \begin{frame}{A curious calculation}
-    Now, suppose that $a, a', b, b' \in G$ are elements such that $aK = a'K$ and $bK = b'K.$\\
+    Now, suppose that ${\color{red}a}, {\color{red}a'}, {\color{blue}b}, {\color{blue}b'} \in G$ are elements such that ${\color{red}a}K = {\color{red}a'}K$ and ${\color{blue}b}K = {\color{blue}b'}K.$\\
     \uncover<2->{Then, we see that }
     \begin{align*} 
-        \uncover<3->{(ab)K &= a(bK)}\\
-        \uncover<4->{&= a(Kb) }\\
-        \uncover<5->{&= a(Kb') }\\
-        \uncover<6->{&= (aK)b' }\\
-        \uncover<7->{&= (a'K)b' }\\
-        \uncover<8->{&= a'(Kb') }\\
-        \uncover<9->{&= (a'b')K.}
+        \uncover<3->{({\color{red}a}{\color{blue}b})K &= a({\color{blue}b}K)}\\
+        \uncover<4->{&= {\color{red}a}(K{\color{blue}b}) }\\
+        \uncover<5->{&= {\color{red}a}(K{\color{blue}b'}) }\\
+        \uncover<6->{&= ({\color{red}a}K){\color{blue}b'} }\\
+        \uncover<7->{&= ({\color{red}a'}K){\color{blue}b'} }\\
+        \uncover<8->{&= {\color{red}a'}(K{\color{blue}b'}) }\\
+        \uncover<9->{&= ({\color{red}a'}{\color{blue}b'})K.}
     \end{align*}
     \uncover<10->{Let us keep this in mind for now. We shall come back to it later.}\\
-    \uncover<11->{Note that the only property we used was that $gK = Kg$ and not really that $K$ was a kernel. }
+    \uncover<11->{Note that the only property we used was that ${\color{orange}{gK = Kg}}$ and not really that $K$ was a kernel. }
 \end{frame}
 \begin{frame}{Coming back to cosets}
-    Recall the set of cosets $G/H.$ \uncover<2->{We wish to turn this set into a group. }
+    Recall the set of cosets $G/H.$ \uncover<2->{We wish to turn this set into a group.}\\~\\
+    \uncover<3->{What should the group operation be? }\\
+    \uncover<4->{Well, given cosets $aH$ and $bH,$ we wish to define $(aH)(bH.).$ }\\
+    \uncover<5->{Moreover, the product must again be a coset. }\\~\\
+    \uncover<6->{So, the question is: What $g \in G$ should be pick to define
+    \begin{equation*} 
+        (aH)(bH) = gH?
+    \end{equation*} }
+    \uncover<7->{Well, the natural choice is: $g = ab.$ }\\
+    \uncover<8->{However, there is a problem... }
+\end{frame}
+\begin{frame}{A problem :(}
+    When we talk about the product $(aH)(bH),$ we are defining products of two \emph{sets}.\\
+    \uncover<2->{Now, given any coset of $H,$ it is true that it can be written as $aH$ for \emph{some} $a \in G.$ }\\
+    \uncover<3->{However, the problem is that the $a$ is not (always) unique. }\\
+    \uncover<4->{Thus, when defining the product, the product must not depend on the representative chosen. }\\
+    \uncover<5->{This means that we must take care of the following: }\\~\\
+    \uncover<6->{Whenever we have ${\color{red}a}H = {\color{red}a'}H$ and ${\color{blue}b}H = {\color{blue}b'}H$}\uncover<7->{, we must have
+    \begin{equation*} 
+        \only<7-8|handout:0>{ ({\color{red}a}H)({\color{blue}b}H)}%
+        \only<8>{=}\uncover<8-9>{({\color{red}a}{\color{blue}b})H = ({\color{red}a'}{\color{blue}b'})H}%
+        \only<7-8|handout:0>{= ({\color{red}a'}H)({\color{blue}b'}H)}.
+    \end{equation*} }
+\end{frame}
+\begin{frame}{Solving the problem :)}
+    \uncover<1->{Well, what does that remind us of?} \uncover<2->{That was a property kernels of homomorphisms have! }\\
+    \uncover<3->{In fact, what we saw was that all we need is that ${\color{orange}{gH = Hg}}$ (for all $g \in G$) and then, we always have the desired property. }\\~\\
+    \uncover<4->{Note that we have shown that if ${\color{orange}{gH = Hg}},$ then the multiplication is well-defined. }\\
+    \uncover<5->{In fact, the converse is true as well.} \uncover<6->{That is,} \uncover<7->{if
+    \begin{equation*} 
+        {\color{red}a}H = {\color{red}a'}H, {\color{blue}b}H = {\color{blue}b'}H \implies ({\color{red}a}{\color{blue}b})H = ({\color{red}a'}{\color{blue}b'})H,
+    \end{equation*}} 
+    \uncover<8->{then $H$ must satisfy ${\color{orange}{gH = Hg}}.$ }
+\end{frame}
+\begin{frame}{Normal subgroups}
+    The previous discussion brings us to an important notion - that of a \emph{normal} subgroup. \uncover<2->{What do you think is the definition? }
+    \uncover<2->{\begin{defn}[Normal subgroup]
+        \uncover<2->{A subgroup $N$ of a group $G$ is said to be \emph{normal} if }
+        \uncover<3->{
+        \begin{equation*} 
+            gN = Ng
+        \end{equation*}
+        for all $g \in G.$ }
+    \end{defn} }
+    \uncover<4->{Said differently, we must have $gNg^{-1} = N$ for all $g \in G.$ }\\
+    \uncover<5->{Said even more differently, given any $n \in G,$ and $g \in G,$ we must have $gng^{-1} \in N.$ }
+\end{frame}
+\begin{frame}{Quotienting}
+    With this, we come to the last theme for today, another very recurring theme in mathematics \uncover<2->{- \emph{quotienting}. }\\
+    \only<3|handout:0>{We first look at the definition and then have discussion about the theme. }
+    \uncover<4->{\begin{defn}[Quotient group]
+        Let $G$ be a group and $N$ be a normal subgroup of $G.$\\
+        Then, the set of cosets $G/N$ is a group under the operation defined by
+        \begin{equation*} 
+            (aN)(bN) \vcentcolon= (ab)N,
+        \end{equation*}
+        which is well-defined in view of our previous discussion.
+    \end{defn} }
+    \uncover<5->{We sometimes use the notation $\bar{g}$ to denote the coset $gH.$ (When $H$ is clear from context.) }\\
+    \uncover<6->{Another thing to note is that any subgroup of an abelian group is normal. }
+\end{frame}
+\begin{frame}{Example}
+    Consider the group $(\mathbb{Z}, +)$ and the subgroup ${\color{ProcessBlue}5}\mathbb{Z}.$ (Is this normal?)\\
+    \uncover<2->{(Since the group operation is denoted with $+,$ we will use $+$ to denote the cosets as well.) }\\
+    \uncover<3->{As an example, one of the cosets of ${\color{ProcessBlue}5}\mathbb{Z}$ is 
+    \begin{equation*} 
+        2 + {\color{ProcessBlue}5}\mathbb{Z} = \{\ldots, -8, -3, 2, 7, 12, \ldots\}.
+    \end{equation*} }
+    \uncover<4->{The set of cosets is $\{\bar{0}, \bar{1}, \bar{2}, \bar{3}, \bar{4}\}.$ }\uncover<5->{The addition (as an example) is like 
+    \begin{equation*} 
+        \bar{1} + \bar{2} = \bar{3}, \quad \bar{3} + \bar{4} = \bar{2}, \quad \bar{2} + \bar{3} = \bar{0}.
+    \end{equation*} }
+    \uncover<6->{Basically, this is just addition modulo ${\color{ProcessBlue}5}.$ }\\~\\
+    \uncover<7->{The above group is what is called $\mathbb{Z}/{\color{ProcessBlue}5}\mathbb{Z}.$ }\uncover<8->{Of course, this works for all values of ${\color{ProcessBlue}5}.$ }\\
+    \uncover<9->{In fact, this is the group (up to isomorphism) which we saw earlier as $\{1, \ldots, {\color{ProcessBlue}n}-1\}$ with addition modulo ${\color{ProcessBlue}n}.$ }
 \end{frame}
 \end{document}
