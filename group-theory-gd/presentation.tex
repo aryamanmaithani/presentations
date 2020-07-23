@@ -9,6 +9,7 @@
 \institute[IITB]{IIT Bombay}
 \usetheme{Warsaw}
 % \usecolortheme{beetle}
+\usepackage{graphicx}
 
 \newcommand{\id}{\operatorname{id}}
 \renewcommand{\exp}{\operatorname{exp}}
@@ -21,6 +22,13 @@
 \begin{frame}
     \titlepage
 \end{frame}
+\begin{frame}{Greetings}
+    Hi, \uncover<2->{welcome to this }
+    \begin{center}
+        \uncover<3->{\emph{group}} \uncover<4->{discussion. }
+    \end{center}
+    \uncover<5->{Credits: Aneesh Bapat }
+\end{frame}
 \begin{frame}{Some examples of groups}
     \begin{itemize}
         \uncover<2->{\item The set of real numbers (/complex numbers/rational numbers) {\color<7->{red}{along with}} addition.}
@@ -31,6 +39,11 @@
     \end{itemize}
     \uncover<8->{Note the ``along with.'' We don't talk about a group by just talking about a set. It is necessary to have an operation on it as well.}
 \end{frame}
+\begin{frame}{Joke}
+    \begin{center}
+    \includegraphics[width=7.5 cm]{group-operation.jpeg}
+    \end{center}
+\end{frame}
 \begin{frame}{Some non-examples of groups}
     \begin{itemize}
         \uncover<2->{\item The set of real numbers (/complex numbers/rational numbers) along with multiplication.}
@@ -39,7 +52,7 @@
         \uncover<5->{\item The set of $2\times 2$ real matrices along with multiplication.}
         \uncover<6->{\item The set $\{0, 1, \ldots, n-1\}$ with multiplication defined modulo $n.$}
         \uncover<7->{\item $\mathbb{R}^3$ with cross-product. }
-        % \uncover<8->{\item My friend group.}
+        \uncover<8->{\item Empty set with the empty operation.}
     \end{itemize}
 \end{frame}
 \begin{frame}{What is a group?}
@@ -84,9 +97,9 @@
         \uncover<5->{\item The set of $2\times 2$ real matrices along with multiplication.}
         \uncover<6->{\item The set $\{0, 1, \ldots, n-1\}$ with multiplication defined modulo $n.$}
         \uncover<7->{\item $\mathbb{R}^3$ with cross-product. }
-        % \uncover<8->{\item My friend group.}
+        \uncover<8->{\item Empty set with the empty operation.}
     \end{itemize}}
-    % \uncover<9->{The last case is nothing special. Indeed, in general we need the set to be nonempty since it must always have the identity.} \\~\\
+    \uncover<9->{Note that we need the set to be nonempty since it must always have the identity.} \\~\\
     \uncover<10->{Recall vector spaces?} \uncover<11->{Verify that any vector space along with its $+$ forms a group.}
 \end{frame}
 \begin{frame}{Abelian groups}
@@ -99,7 +112,7 @@
         \end{equation*}
         for all $a, b \in G.$
     \end{defn}}
-    \uncover<5->{From the first slide, everything except for the matrix example was an example of an abelian.}\\
+    \uncover<5->{From the second slide, everything except for the matrix example was an example of an abelian.}\\
     \uncover<6->{Even the example of $(V, +)$ for a vector space $V$ is an abelian group.} \\~\\
     \uncover<7->{{\color<8->{red}{Abel}}ian groups are named after early 19th century mathematician Niels Henrik {\color<8->{red}{Abel}}.}
 \end{frame}
@@ -113,7 +126,7 @@
 \end{frame}
 \begin{frame}{Notations}
     Let $G$ be a group and $x \in G.$ We define $x^n$ for $n \in \mathbb{Z}$ as follows:\\~\\
-    $x^0 \vcentcolon=$\uncover<2->{$e.$}\\
+    $x^0 \vcentcolon=$\uncover<2-> {$e.$}\\
     For $n > 0,$ we define
     \begin{equation*} 
         x^n \vcentcolon= \uncover<3->{\underbrace{x \cdot x \cdots  x}_{n \text{ times}}.}
@@ -191,7 +204,7 @@
         \uncover<3->{\item Is $\mathbb{N} \le \mathbb{Z}?$ }
         \uncover<4->{\item Is $n\mathbb{Z}\le \mathbb{Z}?$ }\uncover<5->{In fact, any subgroup of $\mathbb{Z}$ is of the form $n\mathbb{Z}$ for some $n \in \mathbb{Z}.$ }
         \uncover<6->{\item $\mathbb{Z} \le \mathbb{Q} \le \mathbb{R} \le \mathbb{C}.$ }
-        \uncover<7->{\item The set of $n \times n$ upper invertible diagonal (real) matrices is a subgroup of the group of all invertible $n\times n$ (real) matrices. }
+        \uncover<7->{\item The set of $n \times n$ invertible upper triangular (real) matrices is a subgroup of the group of all invertible $n\times n$ (real) matrices. }
     \end{itemize}
 \end{frame}
 \begin{frame}{Cosets}
@@ -213,7 +226,7 @@
     \begin{prop}[Equality of cosets]
         Let $a, b \in G.$ Then, 
         \begin{equation*} 
-            aH = bH \text{ iff } b^{-1}aH = H \text{ iff } b^{-1}a \in H.
+            aH = bH \quad\text{ iff }\quad b^{-1}aH = H \quad\text{ iff }\quad b^{-1}a \in H.
         \end{equation*}
     \end{prop}
     \uncover<2->{This tells us that if $c \in aH,$ then $aH = cH.$} \uncover<3->{This also leads to the following result. }
@@ -329,7 +342,7 @@
 \end{frame}
 \begin{frame}{Isomorphisms}
     \begin{defn}[Isomorphism]
-        Let $G$ and $H$ be groups. A group homomorphism $\varphi:G \to H$ is said to be \emph{isomorphism} if $\varphi$ is bijective.
+        Let $G$ and $H$ be groups. A group homomorphism $\varphi:G \to H$ is said to be an \emph{isomorphism} if $\varphi$ is bijective.
     \end{defn}
     \uncover<2->{\emph{Remark.} It can be checked that the inverse of a bijective homomorphism is again a homomorphism.} \uncover<3->{In particular, if $\varphi$ is an isomorphism, then so is $\varphi^{-1}.$ }\\
     \uncover<4->{\begin{defn}[Isomorphic]
@@ -396,7 +409,7 @@
 \begin{frame}{Coming back to cosets}
     Recall the set of cosets $G/H.$ \uncover<2->{We wish to turn this set into a group.}\\~\\
     \uncover<3->{What should the group operation be? }\\
-    \uncover<4->{Well, given cosets $aH$ and $bH,$ we wish to define $(aH)(bH.).$ }\\
+    \uncover<4->{Well, given cosets $aH$ and $bH,$ we wish to define $(aH)(bH).$ }\\
     \uncover<5->{Moreover, the product must again be a coset. }\\~\\
     \uncover<6->{So, the question is: What $g \in G$ should be pick to define
     \begin{equation*} 
@@ -439,7 +452,7 @@
         for all $g \in G.$ }
     \end{defn} }
     \uncover<4->{Said differently, we must have $gNg^{-1} = N$ for all $g \in G.$ }\\
-    \uncover<5->{Said even more differently, given any $n \in G,$ and $g \in G,$ we must have $gng^{-1} \in N.$ }
+    \uncover<5->{Said even more differently, given any $n \in N,$ and $g \in G,$ we must have $gng^{-1} \in N.$ }
 \end{frame}
 \begin{frame}{Quotienting}
     With this, we come to the last theme for today, another very recurring theme in mathematics \uncover<2->{- \emph{quotienting}. }\\
@@ -470,4 +483,65 @@
     \uncover<7->{The above group is what is called $\mathbb{Z}/{\color{ProcessBlue}5}\mathbb{Z}.$ }\uncover<8->{Of course, this works for all values of ${\color{ProcessBlue}5}.$ }\\
     \uncover<9->{In fact, this is the group (up to isomorphism) which we saw earlier as $\{1, \ldots, {\color{ProcessBlue}n}-1\}$ with addition modulo ${\color{ProcessBlue}n}.$ }
 \end{frame}
+\begin{frame}{Exercises}
+    1. Let $(G, \cdot)$ be a finite group and let $x \in G.$\\
+    Show that $H = \{1, x, x^2, \ldots\}$ is a (finite) subgroup of $G.$\\~\\
+    Show that $H$ has order $|x|.$\\~\\
+    Conclude that $|x|$ divides $|G|.$ \\
+    In particular, we have $x^{|G|} = e.$
+\end{frame}
+    
+\begin{frame}{Exercises}
+    2. Let $n > 1$ be a natural number. Define
+    \begin{equation*} 
+        (\mathbb{Z}/n\mathbb{Z})^* = \{x : 1 \le x \le n, \gcd(x, n) = 1\}.
+    \end{equation*}
+    Show that $|(\mathbb{Z}/n\mathbb{Z})^*| = \varphi(n),$ where $\varphi$ is the Euler totient function.\\~\\
+    Show that $(\mathbb{Z}/n\mathbb{Z})^*$ is a group under the operation ``multiplication mod $n$'' with identity being $1.$\\~\\
+    Conclude that $a^{\varphi(n)} = 1$ for all $a \in (\mathbb{Z}/n\mathbb{Z})^*.$ (Note that this equality is in the group $(\mathbb{Z}/n\mathbb{Z})^*.$)\\~\\
+    Conclude that $a^{\varphi(n)} \equiv 1 \bmod n$ for all $a$ with $\gcd(a, n) = 1.$\\~\\
+    This is Euler's theorem (in number theory) and Fermat's little theorem is a special case of it.
+\end{frame}
+
+\begin{frame}{Exercises}
+    3. Let $G$ be a finite group and let $p$ be a prime dividing $|G|.$ Let $\mathcal{S}$ denote the set of $p$-tuples of elements of $G$ the product of whose coordinates is $1:$
+    \begin{equation*} 
+        \mathcal{S} = \{(x_1, \ldots, x_p) : x_i \in G \text{ and } x_1x_2\cdots x_p = 1\}.
+    \end{equation*}
+        (a) Show that $\mathcal{S}$ has $|G|^{p-1}$ elements, hence has order divisible by $p.$\\~\\
+        Define the relation $\sim$ on $\mathcal{S}$ be letting $\alpha \sim \beta$ if $\beta$ is a cyclic permutation of $\alpha.$\\~\\
+        (b) Show that a cyclic permutation of an element of $\mathcal{S}$ is again an element of $\mathcal{S}.$ \\
+        (c) Prove that $\sim$ is an equivalence relation on $\mathcal{S}.$\\
+        (d) Prove that an equivalence class contains a single element if and only if it is of the form $(x, \ldots, x)$ with $x^p = 1.$\\
+\end{frame}
+\begin{frame}{Exercises}
+        (e) Prove that every equivalence class has order $1$ or $p$ (this uses the fact that $p$ is a \emph{prime}). Deduce that $|G|^{p-1} = k + pd$ where $k$ is the number of classes of size $1$ and $d$ is the number of classes of size $p.$\\
+        (f) Since $\{(1, \ldots, 1)\}$ is an equivalence class of size $1,$ conclude from (e) that there must be a nonidentity element $x$ in $G$ with $x^p = 1,$ i.e., $G$ contains an element of order $P.$ (Show $p \mid k$ and so $k > 1.$)
+\end{frame}
+\begin{frame}{}
+    The previous exercise proves the following theorem.
+    \begin{thm}[Cauchy's Theorem]
+        If $G$ is a finite group and $p \mid |G|,$ then there exists $x \in G$ such that $p = |x|.$
+    \end{thm}
+    With $H = \{1, x, \ldots\}$ as in Exercise 1, this shows that there exists a subgroup of order $p.$ \\
+    This is a partial converse to Lagrange's theorem (and the statement shown in Exercise 1). \\
+    (And that's the best we can get.) \\~\\
+    \emph{Credits:} The above style of proof was published in Amer. Math. Monthly, 66 (1959), p. 199 by James McKay.\\
+    The above exercise has been taken from Abstract Algebra by Dummit and Foote.
+\end{frame}
+\begin{frame}{Exercises}
+    4. Let $n \ge 1$ be a natural number and define 
+    \begin{equation*} 
+        [n] = \{1, \ldots, n\}.
+    \end{equation*}
+    Let $S_n$ denote the set of all \emph{bijections} from $[n]$ to $[n].$\\
+    Let $\circ$ denote the usual composition operation of functions.\\~\\
+    (a) Show that $\circ$ is a binary operation on $S_n.$\\
+    (b) Show that $S_n$ is a group under $\circ.$\\
+    This is known as the \emph{symmetric group} on $n$ elements.\\
+    This is a very common example of a (family of) group.\\
+    (c) Show that $S_n$ is abelian if and only if $n \le 2.$\\~\\
+    A remarkable theorem called \emph{Cayley's theorem} says that any (finite) group is isomorphic to a subgroup of $S_n$ for some $n.$
+\end{frame}
 \end{document}
+% 5025396551
